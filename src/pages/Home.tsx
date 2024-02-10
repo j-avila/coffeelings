@@ -75,7 +75,7 @@ function App() {
         </div>
       </section>
       <footer className="flex justify-start my-10">
-        <div className="flex flex-col align">
+        <a className="flex flex-col cursor-pointer align" href="/calendar">
           <p className="flex items-center gap-1">
             <i className="fa-solid fa-book"></i>
             My journal
@@ -87,7 +87,7 @@ function App() {
             <span>{state.now.day}</span>
             <span>{state.now.year}</span>
           </p>
-        </div>
+        </a>
       </footer>
     </main>
   );
