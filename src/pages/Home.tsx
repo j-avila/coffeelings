@@ -20,6 +20,12 @@ function App() {
     console.log('📬', state);
   };
 
+  useEffect(() => {
+    if (!state.user?.token) {
+      navigate('/login');
+    }
+  }, [state?.user]);
+
   return (
     <main className="mx-[auto]">
       <Header settings />
