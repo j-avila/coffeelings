@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import Coffee from '../../assets/coffee.svg?react';
 import Amazing from '../../assets/amazing.svg?react';
 import Ok from '../../assets/ok.svg?react';

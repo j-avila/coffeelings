@@ -10,6 +10,13 @@ body {
   font-style: normal;
 }
 
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 400px;
+  max-height: 600px;
+}
+
 textarea::placeholder {
   color: rgb(63, 63, 63);
   font-family: 'yesteryear', cursive;
@@ -35,4 +42,10 @@ textarea::placeholder {
   position: relative;
   top: -20px;
   left: -8px;
+}
+
+.read-bg {
+  background-image: url('./assets/notes.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
 }

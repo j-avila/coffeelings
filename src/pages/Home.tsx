@@ -1,17 +1,15 @@
-import { useState } from 'react';
+import { useContext, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { getNowObj } from '../uitls/date';
 import CoffeStatus from '../components/CoffeeStatus';
 import Indicator from '../components/Indicator';
+import Header from '../components/Header';
+import Footer from '../components/Footer/Footer';
+import { AppContext } from '../context/appContext';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
-  const [state, setState] = useState({
-    roast: 'ok',
-    message: undefined,
-    date: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    now: getNowObj(),
-  });
-
+  const { state, setState } = useContext(AppContext);
+  const navigate = useNavigate();
   const taste = ['amazing', 'ok', 'tired', 'sad', 'stressed'];
 
   const handleChange = (name: string, value: string) => {
@@ -24,12 +22,15 @@ function App() {
     console.log('📬', state);
   };
 
+  useEffect(() => {
+    if (!state.user?.token) {
+      navigate('/login');
+    }
+  }, [state?.user]);
+
   return (
-    <main className="max-w-[320px] mx-[auto]">
-      <header className="flex justify-end gap-4 py-4">
-        <i className="text-lg fa-solid fa-user" />
-        <i className="text-lg fa-solid fa-gear" />
-      </header>
+    <main className="mx-[auto]">
+      <Header settings />
       <section className="flex flex-col justify-center gap-8">
         <div className="flex items-center justify-between gap-4 row">
           <CoffeStatus state={state.roast} />
@@ -54,7 +55,7 @@ function App() {
               <h2 className="p-0 m-0">choose today’s</h2>
               <h1 className="p-0 m-0 text-8xl font-yesteryear">roast</h1>
             </div>
-            <div className="flex">
+            <div className="flex justify-center">
               {/* input */}
               <div className="relative p-4 bg-[#D9A17E] w-72 min-h-48 h-[120px] rounded-xl">
                 <textarea
@@ -64,7 +65,7 @@ function App() {
                   onChange={(e) => handleChange('message', e.target.value)}
                 ></textarea>
                 <button
-                  className="absolute p-1 bottom-2 right-2"
+                  className="absolute p-1 cursor-pointer bottom-2 right-2"
                   onClick={() => postRoast()}
                 >
                   <i className="text-2xl fa-solid text-ok fa-paper-plane"></i>
@@ -74,21 +75,7 @@ function App() {
           </div>
         </div>
       </section>
-      <footer className="flex justify-start my-10">
-        <a className="flex flex-col cursor-pointer align" href="/calendar">
-          <p className="flex items-center gap-1">
-            <i className="fa-solid fa-book"></i>
-            My journal
-          </p>
-          <p className="flex items-center gap-2 mt-1 ">
-            <strong className="text-3xl font-yesteryear">
-              {state.now.month}
-            </strong>
-            <span>{state.now.day}</span>
-            <span>{state.now.year}</span>
-          </p>
-        </a>
-      </footer>
+      <Footer date={state.now} />
     </main>
   );
 }
