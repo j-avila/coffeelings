@@ -1,2 +1,2 @@
-import AuthWrapper from './AuthWrapper';
-export default AuthWrapper;
+import ProtectedRoute from './ProtectedRoute';
+export default ProtectedRoute;

@@ -1,8 +1,7 @@
 // app context
 import dayjs from 'dayjs';
 import React, { createContext, useEffect, useState } from 'react';
-import { getNowObj } from '../uitls/date';
-import AuthWrapper from '../components/Auth';
+import { getNowObj } from '@utils/date';
 
 interface AppContextProps {
   children: React.ReactNode;
@@ -53,10 +52,8 @@ export const AppProvider = ({ children }: AppContextProps) => {
   }, [state]);
 
   return (
-    <AuthWrapper fallback={<div>loading...</div>}>
-      <div className={theme}>
-        <AppContext.Provider value={payload}>{children}</AppContext.Provider>
-      </div>
-    </AuthWrapper>
+    <div className={theme}>
+      <AppContext.Provider value={payload}>{children}</AppContext.Provider>
+    </div>
   );
 };

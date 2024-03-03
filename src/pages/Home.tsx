@@ -1,15 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import dayjs from 'dayjs';
-import CoffeStatus from '../components/CoffeeStatus';
-import Indicator from '../components/Indicator';
-import Header from '../components/Header';
-import Footer from '../components/Footer/Footer';
-import { AppContext } from '../context/appContext';
-import { useNavigate } from 'react-router-dom';
-
+import CoffeStatus from '@components/CoffeeStatus';
+import Indicator from '@components/Indicator';
+import Header from '@components/Header';
+import Footer from '@components/Footer/Footer';
+import { AppContext } from '@context/appContext';
+1;
 function App() {
   const { state, setState } = useContext(AppContext);
-  const navigate = useNavigate();
   const taste = ['amazing', 'ok', 'tired', 'sad', 'stressed'];
 
   const handleChange = (name: string, value: string) => {
@@ -21,12 +19,6 @@ function App() {
     setState({ ...state, date });
     console.log('📬', state);
   };
-
-  useEffect(() => {
-    if (!state.user?.token) {
-      navigate('/login');
-    }
-  }, [state?.user]);
 
   return (
     <main className="mx-[auto]">

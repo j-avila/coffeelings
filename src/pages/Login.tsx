@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import Header from '../components/Header';
-import { AppContext } from '../context/appContext';
-import SignForm from '../components/SignForm';
+import Header from '@components/Header';
+import { AppContext } from '@context/appContext';
+import SignForm from '@components/SignForm';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../services/firebase';
+import { auth } from '@services/firebase';
 
 const LogIn = () => {
   const { state, setState } = useContext(AppContext);
@@ -20,8 +20,6 @@ const LogIn = () => {
       token: user.accessToken,
       displayName: user.displayName,
     };
-
-    console.log('👤', newUser);
 
     if (state && user) {
       const newState = { ...state, user: newUser };

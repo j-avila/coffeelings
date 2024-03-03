@@ -1,16 +1,25 @@
 import { useContext } from 'react';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import Footer from '../components/Footer/Footer';
-import { AppContext } from '../context/appContext';
+import Header from '@components/Header';
+import Button from '@components/Button';
+import Footer from '@components/Footer/Footer';
+import { AppContext } from '@context/appContext';
 import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/services/firebase';
 
 const Settings = () => {
   const navigate = useNavigate();
-  const { state, setState } = useContext(AppContext);
 
+  const { state, setState } = useContext(AppContext);
   const signin = async () => {
     console.log('🌯', 'burrito!');
+  };
+
+  const signout = async () => {
+    await signOut(auth);
+    setState({ ...state, user: null });
+    alert('out !');
+    navigate('/login');
   };
 
   return (
@@ -57,7 +66,7 @@ const Settings = () => {
         <Button styles="my-4 px-8" onClick={() => signin()}>
           Sign in <i className="fa-solid fa-fingerprint" />
         </Button>
-        <Button styles="my-4 px-8">
+        <Button styles="my-4 px-8" onClick={() => signout()}>
           Sign out <i className="fa-solid fa-arrow-right-from-bracket" />
         </Button>
         <h3 className="mt-5 font-bold text-center">Themes</h3>
