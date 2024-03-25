@@ -49,3 +49,9 @@ textarea::placeholder {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.note-bg {
+  background-image: url('./assets/note-bg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}

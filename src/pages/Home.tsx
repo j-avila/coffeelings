@@ -24,7 +24,7 @@ function App() {
     <main className="mx-[auto]">
       <Header settings />
       <section className="flex flex-col justify-center gap-8">
-        <div className="flex items-center justify-between gap-4 row">
+        <div className="container flex items-center justify-between gap-4 row max-w-72">
           <CoffeStatus state={state.roast} />
           {/* roast */}
           <div>

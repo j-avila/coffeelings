@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppContext } from '../../context/appContext';
+// import { AppContext } from '../../context/appContext';
 interface FooterProps {
   title?: string;
   back?: boolean;
@@ -9,11 +9,11 @@ interface FooterProps {
 
 const Header = ({ title, back, settings }: FooterProps) => {
   const navigate = useNavigate();
-  const { state } = useContext(AppContext);
+  // const { state } = useContext(AppContext);
   const settingsPos =
     back && title
-      ? 'flex items-center justify-between w-[100%] py-6 px-2'
-      : 'flex items-center justify-end w-[100%] py-6 px-2';
+      ? 'flex items-center justify-between w-[100%] py-2 px-3'
+      : 'flex items-center justify-end w-[100%] py-2 px-3';
 
   return (
     <header className={settingsPos}>
@@ -24,12 +24,11 @@ const Header = ({ title, back, settings }: FooterProps) => {
         />
       )}
       {title && (
-        <h1 className="flex justify-center my-10 text-6xl font-yesteryear">
+        <h1 className="flex justify-center my-4 text-6xl font-yesteryear">
           {title}
         </h1>
       )}
       <div className="flex">
-        {state?.user && <p>Bienvenido {state.user.email}</p>}
         {settings && (
           <Link to="/settings">
             <i className="text-2xl cursor-pointer fa-solid fa-gear" />

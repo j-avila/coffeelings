@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Home from '@pages/Home';
 import Calendar from '@pages/Calendar';
@@ -7,8 +8,11 @@ import SignUp from '@pages/SignUp';
 import ErrorPage from '@pages/ErrorPage';
 import LogIn from '@pages/Login';
 import ProtectedRoute from '@components/Auth';
-
+// context
 import { AppProvider } from '@context/appContext';
+
+// css
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const router = createBrowserRouter([
@@ -24,9 +28,10 @@ const App = () => {
   ]);
 
   return (
-    <div className="container pb-10">
+    <div className="pb-20">
       <AppProvider>
         <RouterProvider router={router} />
+        <ToastContainer position="bottom-center" theme="dark" />
       </AppProvider>
     </div>
   );

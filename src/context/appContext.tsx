@@ -3,8 +3,22 @@ import dayjs from 'dayjs';
 import React, { createContext, useEffect, useState } from 'react';
 import { getNowObj } from '@utils/date';
 
+export type Day = {
+  month?: string;
+  year?: number;
+  monthNumber: number;
+};
+
 interface AppContextProps {
   children: React.ReactNode;
+  value?: {
+    state: PayloadProps;
+    setState: React.Dispatch<React.SetStateAction<PayloadProps>>;
+    error: boolean;
+    setError: React.Dispatch<React.SetStateAction<string>>;
+    currentDate: Day;
+    setCurrentDate: React.Dispatch<React.SetStateAction<Day>>;
+  };
 }
 
 // Create a provider for the app context
@@ -23,6 +37,10 @@ type PayloadProps = {
     token: string;
     displayName: string;
   };
+  currentDate: Day;
+  setSettings?: React.Dispatch<React.SetStateAction<PayloadProps>>;
+  setUser?: React.Dispatch<React.SetStateAction<PayloadProps>>;
+  setCurrentDate: React.Dispatch<React.SetStateAction<Day>>;
 };
 
 // Create a context for the app
@@ -37,15 +55,29 @@ const initialState: PayloadProps = {
   },
 };
 
+type Error = { error: boolean; message: string };
+
 export const AppContext = createContext(initialState);
 
 export const AppProvider = ({ children }: AppContextProps) => {
   const [state, setState] = useState<PayloadProps>(initialState);
+  const [currentDate, setCurrentDate] = useState<Day>({
+    year: dayjs().year() || 2024,
+    month: dayjs().format('MMMM'),
+    monthNumber: dayjs().month() + 1 || 1,
+  });
+  const [error, setError] = useState<Error>({ error: false, message: '' });
 
   // Provide the app context
-  const theme = `container pb-10 text-[${state?.settings?.fontSize}px]`;
-
-  const payload = { state, setState };
+  const theme = `pb-10 text-[${state?.settings?.fontSize}px]`;
+  const payload = {
+    state,
+    setState,
+    currentDate,
+    setCurrentDate,
+    error,
+    setError,
+  };
 
   useEffect(() => {
     console.log('🌯', state);

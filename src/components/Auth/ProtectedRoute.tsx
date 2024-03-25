@@ -1,6 +1,6 @@
-import { AppContext } from '@/context/appContext';
 import React, { useContext } from 'react';
-import { Route, Navigate, useLocation } from 'react-router-dom';
+import { AppContext } from '@/context/appContext';
+import { Navigate, useLocation } from 'react-router-dom';
 
 type ProtectedRouteProps = {
   component: React.FC;

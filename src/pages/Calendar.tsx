@@ -1,30 +1,26 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
-
-const historyItem = [
-  {
-    id: 1,
-    roast: 'tired',
-    message:
-      'Well this bitch dont stop talking about herslef and is quite anoiyng',
-    date: '2024-02-28 16:31:51',
-  },
-  {
-    id: 2,
-    roast: 'ok',
-    message:
-      'Well this bitch dont stop talking about herslef and is quite anoiyng',
-    date: '2024-02-27 12:00:00',
-  },
-];
+import CalendarSchedule from '@/components/Scheduler';
+import DatePicker from '@/components/Datepicker';
+import CoffeeSpinner from '@/components/CoffeeSpinner';
+import useSchedule from '@/hooks/getSchedule';
 
 const Calendar = () => {
+  const { date, isLoading } = useSchedule();
+
+  useEffect(() => {
+    console.log('💻', date);
+  }, [date]);
+
   return (
-    <div className="flex flex-col items-center justify-between w-100 h-[100vh]">
-      <Header title="Journal" back settings />
-      Calendar
-      <Footer />
+    <div className="note-bg">
+      <div className="flex flex-col items-center justify-between w-100 h-[100vh]">
+        <Header title="Journal" back settings />
+        <DatePicker />
+        {isLoading ? <CoffeeSpinner /> : <CalendarSchedule data={date} />}
+        <Footer />
+      </div>
     </div>
   );
 };
