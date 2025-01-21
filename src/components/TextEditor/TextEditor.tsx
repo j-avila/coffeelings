@@ -9,12 +9,17 @@ const TextEditor = ({ data }: { data: any }) => {
     message: '',
   });
   const [isEditing, setIsEditing] = useState(false);
+  const [txtStyles, setTxtStyles] = useState(
+    'bg-[#D9A17E] h-[30vh] w-[100%] my-4 rounded-md p-4 outline-none focus:ring-0',
+  );
   const notify = (msg: string) => toast(msg);
   const getDayName = (date: string) => dayjs(date).format('dddd');
 
   useEffect(() => {
     data && setDataday(data);
-  }, [data]);
+    const styles = isEditing ? 'bg-white' : 'bg-[#D9A17E]';
+    setTxtStyles(txtStyles.replace(/bg-\w+/, styles));
+  }, [data, isEditing]);
 
   return (
     <div>
@@ -43,10 +48,11 @@ const TextEditor = ({ data }: { data: any }) => {
         </>
       </div>
       <textarea
-        className="bg-[#D9A17E] h-[30vh] w-[100%] my-4 rounded-md p-4 outline-none focus:ring-0"
+        className={txtStyles}
         name="message"
         disabled={!isEditing}
         placeholder="How are you feeling today?"
+        onChange={(e) => setDataday({ ...dataDay, message: e.target.value })}
         value={dataDay.message}
       />
 

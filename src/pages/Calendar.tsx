@@ -5,9 +5,10 @@ import CalendarSchedule from '@/components/Scheduler';
 import DatePicker from '@/components/Datepicker';
 import CoffeeSpinner from '@/components/CoffeeSpinner';
 import useSchedule from '@/hooks/getSchedule';
+import CalendarTwo from '@/components/calendarTwo';
 
 const Calendar = () => {
-  const { date, isLoading } = useSchedule();
+  const { date, currentDate, isLoading } = useSchedule();
 
   useEffect(() => {
     console.log('💻', date);
@@ -18,7 +19,12 @@ const Calendar = () => {
       <div className="flex flex-col items-center justify-between w-100 h-[100vh]">
         <Header title="Journal" back settings />
         <DatePicker />
-        {isLoading ? <CoffeeSpinner /> : <CalendarSchedule data={date} />}
+        {isLoading ? (
+          <CoffeeSpinner />
+        ) : (
+          // <CalendarSchedule data={date} currentDate={currentDate} />
+          <CalendarTwo />
+        )}
         <Footer />
       </div>
     </div>

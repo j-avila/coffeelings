@@ -65,38 +65,30 @@ body {
   width: 47px;
   height: 47px;
   background-image: radial-gradient(
-      75% 59%,
-      ellipse,
+      ellipse at 75% 59%,
       rgba(255, 255, 255, 0.2),
       transparent 95%
     ),
-    radial-gradient(5% 9%, ellipse, rgba(255, 255, 255, 0.1), transparent 5%),
-    radial-gradient(0% 0%, ellipse, rgba(255, 255, 255, 0.3), transparent 55%);
+    radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent 5%),
+    radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.3), transparent 55%);
   background-image:
     -webkit-radial-gradient(
-      75% 59%,
-      ellipse,
+      ellipse at 75% 59%,
       rgba(255, 255, 255, 0.2),
       transparent 95%
     ),
-    -webkit-radial-gradient(5% 9%, ellipse, rgba(255, 255, 255, 0.1), transparent
+    -webkit-radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent
           5%),
-    -webkit-radial-gradient(0% 0%, ellipse, rgba(255, 255, 255, 0.3), transparent
+    -webkit-radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.3), transparent
           55%);
   background-image:
     -moz-radial-gradient(
-      75% 59%,
-      ellipse,
+      ellipse at 75% 59%,
       rgba(255, 255, 255, 0.2),
       transparent 95%
     ),
-    -moz-radial-gradient(5% 9%, ellipse, rgba(255, 255, 255, 0.1), transparent
-          5%),
-    -moz-radial-gradient(0% 0%, ellipse, rgba(255, 255, 255, 0.3), transparent
-          55%);
-  position: absolute;
-  left: 0;
-  border-radius: 50%;
+    -moz-radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent
+          5%);
 }
 .cup:hover .coffee {
   transform: rotate(15deg);

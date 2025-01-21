@@ -1,47 +1,8 @@
 // app context
+import { createContext, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import React, { createContext, useEffect, useState } from 'react';
 import { getNowObj } from '@utils/date';
-
-export type Day = {
-  month?: string;
-  year?: number;
-  monthNumber: number;
-};
-
-interface AppContextProps {
-  children: React.ReactNode;
-  value?: {
-    state: PayloadProps;
-    setState: React.Dispatch<React.SetStateAction<PayloadProps>>;
-    error: boolean;
-    setError: React.Dispatch<React.SetStateAction<string>>;
-    currentDate: Day;
-    setCurrentDate: React.Dispatch<React.SetStateAction<Day>>;
-  };
-}
-
-// Create a provider for the app context
-type PayloadProps = {
-  message: string;
-  roast: string;
-  now: { year: number; month: string; day: number };
-  date: string;
-  settings?: {
-    fontSize: number;
-    theme: string;
-  };
-  user?: {
-    email: string;
-    uid: string;
-    token: string;
-    displayName: string;
-  };
-  currentDate: Day;
-  setSettings?: React.Dispatch<React.SetStateAction<PayloadProps>>;
-  setUser?: React.Dispatch<React.SetStateAction<PayloadProps>>;
-  setCurrentDate: React.Dispatch<React.SetStateAction<Day>>;
-};
+import { AppContextProps, Day, PayloadProps } from '@models/types';
 
 // Create a context for the app
 const initialState: PayloadProps = {
