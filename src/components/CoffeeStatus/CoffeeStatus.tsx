@@ -1,9 +1,9 @@
-import Coffee from '../../assets/coffee.svg?react';
-import Amazing from '../../assets/amazing.svg?react';
-import Ok from '../../assets/ok.svg?react';
-import Tired from '../../assets/tired.svg?react';
-import Sad from '../../assets/sad.svg?react';
-import Stressed from '../../assets/stressed.svg?react';
+import Coffee from '@assets/coffee.svg?react';
+import Amazing from '@assets/amazing.svg?react';
+import Ok from '@assets/ok.svg?react';
+import Tired from '@assets/tired.svg?react';
+import Sad from '@assets/sad.svg?react';
+import Stressed from '@assets/stressed.svg?react';
 
 interface Props {
   state: string;

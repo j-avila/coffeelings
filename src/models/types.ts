@@ -4,39 +4,8 @@ export type Day = {
   monthNumber: number;
 };
 
-interface AppContextProps {
-  children: React.ReactNode;
-  value?: {
-    state: PayloadProps;
-    setState: React.Dispatch<React.SetStateAction<PayloadProps>>;
-    error: boolean;
-    setError: React.Dispatch<React.SetStateAction<string>>;
-    currentDate: Day;
-    setCurrentDate: React.Dispatch<React.SetStateAction<Day>>;
-  };
-}
 
-// Create a provider for the app context
-type PayloadProps = {
-  message: string;
-  roast: string;
-  now: { year: number; month: string; day: number };
-  date: string;
-  settings?: {
-    fontSize: number;
-    theme: string;
-  };
-  user?: {
-    email: string;
-    uid: string;
-    token: string;
-    displayName: string;
-  };
-  currentDate: Day;
-  setSettings?: React.Dispatch<React.SetStateAction<PayloadProps>>;
-  setUser?: React.Dispatch<React.SetStateAction<PayloadProps>>;
-  setCurrentDate: React.Dispatch<React.SetStateAction<Day>>;
-};
+
 
 export interface Schedule {
   '2024': { [key: string]: DailyRoast[] };

@@ -5,11 +5,12 @@ import TextEditor from '../TextEditor';
 type Day = {
   roast?: string;
   day?: number;
+  [key: number]: unknown;
 };
 
 type CalendarProps = {
   data: { month: string; year: string; yearData: []; [key: number]: Day };
-  currentDate: { month: string; year: string };
+  currentDate: { month: string; year: string; monthNumber: number };
 };
 
 type DayCubeProps = {
@@ -33,9 +34,9 @@ const DayCube = ({ day, data = undefined, handleAction }: DayCubeProps) => {
 // calendar component
 const Calendar = ({ data, currentDate }: CalendarProps) => {
   const [days, setDays] = useState([] as number[]);
-  const [daySelected, setDaySelected] = useState<Day | undefined>();
+  const [daySelected] = useState<Day | undefined>();
 
-  const test = (e) => console.log(e);
+  const test = (e: unknown) => console.log(e); // TODO: Specify correct type for e
   const getDaysInMonth = (year: number, month: number) => {
     // Month in dayjs is 0-based, so January is 0, and December is 11.
     const monthDays = dayjs(`${year}-${month + 1}-01`).daysInMonth();
@@ -54,7 +55,7 @@ const Calendar = ({ data, currentDate }: CalendarProps) => {
     const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
     setDays(daysArray);
     console.log('le data', data, currentDate);
-  }, [data]);
+  }, [data, currentDate]);
 
   return (
     <div className="w-80">
@@ -64,7 +65,7 @@ const Calendar = ({ data, currentDate }: CalendarProps) => {
               <DayCube
                 day={day}
                 key={day}
-                data={getDay(currentDate.year, currentDate.monthNumber, day)}
+                data={getDay(Number(currentDate.year), Number(currentDate.monthNumber), day)} // Ensure year and monthNumber are numbers
                 handleAction={test}
               />
             ))

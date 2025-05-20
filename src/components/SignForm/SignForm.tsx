@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import { AppContext } from '../../context/appContext';
 
 interface SignFormProps {
@@ -13,7 +13,7 @@ const SignForm = ({ action }: SignFormProps) => {
   });
   const { state } = useContext(AppContext);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -25,7 +25,7 @@ const SignForm = ({ action }: SignFormProps) => {
     }
   };
 
-  const validate = () => {
+  const validate = useCallback(() => {
     // const requiredFields: Array<keyof typeof form> = ['email', 'password'];
     // const isValid = requiredFields.every((field) => form[field]);
 
@@ -34,11 +34,11 @@ const SignForm = ({ action }: SignFormProps) => {
     const isPasswordValid = form?.password?.length >= 8;
 
     setIsValid(isPasswordValid && isEmailValid);
-  };
+  }, [form]);
 
   useEffect(() => {
     validate();
-  }, [form]);
+  }, [form, validate]);
 
   return (
     <div>

@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
-import CalendarSchedule from '@/components/Scheduler';
 import DatePicker from '@/components/Datepicker';
 import CoffeeSpinner from '@/components/CoffeeSpinner';
 import useSchedule from '@/hooks/getSchedule';
 import CalendarTwo from '@/components/calendarTwo';
 
 const Calendar = () => {
-  const { date, currentDate, isLoading } = useSchedule();
+  const { date, isLoading } = useSchedule();
 
   useEffect(() => {
     console.log('💻', date);

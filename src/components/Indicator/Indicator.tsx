@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 interface Props {
   state: string;
-  action: any;
+  action: (type: string, state: string) => void;
   isSelected: boolean;
 }
 

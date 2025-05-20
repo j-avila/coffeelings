@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { toast } from 'react-toastify';
 
-const TextEditor = ({ data }: { data: any }) => {
-  const [dataDay, setDataday] = useState({
+
+const TextEditor = ({ data }: { data: unknown }) => {
+  const [dataDay, setDataday] = useState<{ id: number; date: string; message: string }>({
     id: 0,
     date: '',
     message: '',
@@ -12,14 +12,13 @@ const TextEditor = ({ data }: { data: any }) => {
   const [txtStyles, setTxtStyles] = useState(
     'bg-[#D9A17E] h-[30vh] w-[100%] my-4 rounded-md p-4 outline-none focus:ring-0',
   );
-  const notify = (msg: string) => toast(msg);
   const getDayName = (date: string) => dayjs(date).format('dddd');
 
   useEffect(() => {
     data && setDataday(data);
     const styles = isEditing ? 'bg-white' : 'bg-[#D9A17E]';
     setTxtStyles(txtStyles.replace(/bg-\w+/, styles));
-  }, [data, isEditing]);
+  }, [data, isEditing, txtStyles]);
 
   return (
     <div>
@@ -52,7 +51,7 @@ const TextEditor = ({ data }: { data: any }) => {
         name="message"
         disabled={!isEditing}
         placeholder="How are you feeling today?"
-        onChange={(e) => setDataday({ ...dataDay, message: e.target.value })}
+        onChange={(e) => setDataday({ id: dataDay.id, date: dataDay.date, message: e.target.value })}
         value={dataDay.message}
       />
 

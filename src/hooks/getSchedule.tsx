@@ -1,7 +1,7 @@
 import { axiosInstance } from '@/api/axios';
 import { AppContext } from '@/context/appContext';
-import { useContext, useEffect, useState } from 'react';
-import { DailyRoast, Schedule } from './types';
+import { useContext, useEffect, useState, useCallback } from 'react';
+import { DailyRoast, Schedule, DateEnum, Roast } from '../models/types';
 import dayjs from 'dayjs';
 
 const useSchedule = () => {
@@ -10,34 +10,43 @@ const useSchedule = () => {
   const { currentDate } = useContext(AppContext);
 
   const createDaysOfMonth = (year: number, month: number) => {
+    // TODO: Specify the correct type for year
     const daysInMonth = dayjs(`${year}-${month}`, 'YYYY-MM').daysInMonth();
-    const days: { [key: string]: { [key: string]: any } } = {
-      [year]: {
-        [month]: {},
+    const days: { [year: string]: { [month: string]: { [day: number]: DailyRoast } } } = {
+      [year.toString()]: {
+        [month.toString()]: {},
       },
     };
 
     for (let day = 1; day <= daysInMonth; day++) {
-      // TODO: revisar el por que no toma bien el año creado por defecto
-      const date = {
+      const date: DailyRoast = {
         id: day,
-        roast: 'ok',
+        roast: Roast.Ok,
         message: '',
-        date: `${year}-${month}`,
+        date: `${year}-${month}` as DateEnum,
       };
-
-      days[year][month][day] = date;
+      days[year.toString()][month.toString()][day] = date;
     }
 
     return days;
   };
 
-  const getCurrentDate = (yearData: Schedule) => {
-    let DateData = createDaysOfMonth(2024, 4);
+  const getCurrentDate = useCallback((yearData: Schedule) => {
+    let DateData = createDaysOfMonth(2024, 4); // TODO: Use dynamic year/month
     const year = currentDate.year?.toString();
-    const month = currentDate.month?.toLocaleLowerCase();
+    const month = currentDate.month?.toString().toLowerCase();
 
-    if (!yearData[year]) {
+    if (!year || !yearData[year]) {
+      DateData = createDaysOfMonth(2024, 4);
+    }
+
+    return DateData;
+  }, [currentDate]);
+    let DateData = createDaysOfMonth(2024, 4); // TODO: Use dynamic year/month
+    const year = currentDate.year?.toString();
+    const month = currentDate.month?.toString().toLowerCase();
+
+    if (!year || !yearData[year]) {
       DateData = createDaysOfMonth(2024, 4);
     }
 
@@ -53,7 +62,7 @@ const useSchedule = () => {
       const response = await axiosInstance.get('/calendar/1');
       const currentDate = getCurrentDate(response.data);
 
-      setDate(currentDate);
+      setDate(currentDate as unknown as DailyRoast); // TODO: Refactor for correct type
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -62,8 +71,17 @@ const useSchedule = () => {
   };
 
   useEffect(() => {
-    getHistory();
-  }, []);
+    (async () => {
+      try {
+        const response = await axiosInstance.get('/calendar/1');
+        const currentDate = getCurrentDate(response.data);
+        setDate(currentDate as unknown as DailyRoast); // TODO: Refactor for correct type
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, [getCurrentDate]); // dependency is now stable due to useCallback
 
   return { date, currentDate, isLoading };
 };

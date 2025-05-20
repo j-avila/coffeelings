@@ -1,5 +1,5 @@
 import { useRouteError } from 'react-router-dom';
-import CoffeeEmpty from '../assets/not_found.svg?react';
+import CoffeeEmpty from '@assets/not_found.svg?react';
 
 export default function ErrorPage() {
   const error = useRouteError();
