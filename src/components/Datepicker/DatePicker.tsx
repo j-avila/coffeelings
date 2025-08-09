@@ -1,4 +1,6 @@
 import { useAppContext } from '@/context/AppContext';
+import dayjs from 'dayjs';
+import { useEffect } from 'react';
 
 // datePicker
 const DatePicker = () => {
@@ -78,11 +80,15 @@ const DatePicker = () => {
     const daySelected = currentMonth(type);
 
     setCurrentDate({
-      year: daySelected?.year || 2024,
-      month: daySelected?.value || 'January',
-      monthNumber: daySelected?.id || 1,
+      year: daySelected?.year || dayjs().year(),
+      month: daySelected?.value || dayjs().month(),
+      monthNumber: daySelected?.id || dayjs().day(),
     });
   };
+
+  useEffect(() => {
+    console.log('Current Date:', currentDate);
+  }, [currentDate]);
 
   return (
     <div className="flex items-center justify-center gap-6 py-4">
@@ -91,8 +97,8 @@ const DatePicker = () => {
         onClick={() => handleDate('prev')}
       />
       <i className="fa-regular fa-calendar-days" />
-      <h3 className="text-4xl font-yesteryear">{currentDate.month}</h3>
-      <span>{currentDate.year}</span>
+      <h3 className="text-4xl font-yesteryear">{currentDate?.month}</h3>
+      <span>{currentDate?.year}</span>
       <i
         className="fa-solid fa-chevron-right"
         onClick={() => handleDate('next')}

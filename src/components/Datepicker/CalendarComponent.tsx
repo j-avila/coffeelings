@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
-const Calendar: React.FC = () => {
+const CalendarComponent: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
+  const [calendarDays, setCalendarDays] = useState<dayjs.Dayjs[]>([]);
 
   const startOfMonth = currentDate.startOf('month');
   const endOfMonth = currentDate.endOf('month');
@@ -29,7 +30,15 @@ const Calendar: React.FC = () => {
     return calendar;
   };
 
-  const calendarDays = generateCalendar();
+  useEffect(() => {
+    const days = generateCalendar();
+    console.log('Generated days:', days);
+    setCalendarDays(days);
+  }, []);
+
+  useEffect(() => {
+    console.log('Calendar updated:', calendarDays);
+  }, [calendarDays]);
 
   return (
     <div>
@@ -40,7 +49,10 @@ const Calendar: React.FC = () => {
       </header>
       <div className="calendar-grid">
         {calendarDays.map((day, index) => (
-          <div key={index} className={`calendar-day ${day.isSame(currentDate, 'month') ? '' : 'disabled'}`}>
+          <div
+            key={index}
+            className={`calendar-day ${day.isSame(currentDate, 'month') ? '' : 'disabled'}`}
+          >
             {day.date()}
           </div>
         ))}
@@ -49,4 +61,4 @@ const Calendar: React.FC = () => {
   );
 };
 
-export default Calendar;
+export default CalendarComponent;

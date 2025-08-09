@@ -43,7 +43,6 @@ const LogIn = () => {
         const newState = { ...state, user: newUser };
         setState(newState);
         notify(`Welcome back ${newUser.email}!`, 'success');
-        console.log('🐣', newUser);
       }
     } catch (err) {
       console.log(err);
@@ -52,12 +51,11 @@ const LogIn = () => {
   };
 
   useEffect(() => {
-    console.log('🔥', state);
     if (state?.user) {
       console.log('logged', state.user);
       navigate('/');
     }
-  }, [state, navigate]);
+  }, [state?.user, navigate]);
 
   return (
     <div className="flex flex-col items-center justify-start w-100 h-[100vh] read-bg">

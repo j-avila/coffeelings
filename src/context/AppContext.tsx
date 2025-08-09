@@ -34,7 +34,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// TODO: revisar el state que exporta el context
 export const useAppContext = () => {
   const context = React.useContext(AppContext);
   if (context === undefined) {
