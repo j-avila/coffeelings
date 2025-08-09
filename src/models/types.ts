@@ -1,11 +1,8 @@
-export type Day = {
+export interface Day {
   month?: string;
   year?: number;
   monthNumber: number;
-};
-
-
-
+}
 
 export interface Schedule {
   '2024': { [key: string]: DailyRoast[] };
@@ -31,4 +28,15 @@ export enum Roast {
   Happy = 'happy',
   Ok = 'ok',
   Tired = 'tired',
+}
+
+export interface PayloadProps {
+  roast: string;
+  message: string;
+  date: string;
+  now: object;
+  settings: {
+    fontSize: number;
+    theme: string;
+  };
 }

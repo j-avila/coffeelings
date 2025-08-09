@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import Header from '../components/Header';
-import { AppContext } from '../context/appContext';
+import { useAppContext } from '../context/AppContext';
 import SignForm from '../components/SignForm';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../services/firebase';
 
 const SignUp = () => {
-  const { state, setState } = useContext(AppContext);
+  const { state, setState } = useAppContext();
   const navigate = useNavigate();
 
   const signUp = async (form) => {

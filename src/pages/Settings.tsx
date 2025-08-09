@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Header from '@components/Header';
 import Button from '@components/Button';
 import Footer from '@components/Footer/Footer';
-import { AppContext } from '@context/appContext';
+import { useAppContext } from '@/context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/services/firebase';
@@ -10,7 +10,7 @@ import { auth } from '@/services/firebase';
 const Settings = () => {
   const navigate = useNavigate();
 
-  const { state, setState } = useContext(AppContext);
+  const { state, setState } = useAppContext();
   const signin = async () => {
     console.log('🌯', 'burrito!');
   };

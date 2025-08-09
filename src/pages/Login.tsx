@@ -1,41 +1,63 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
 import Header from '@components/Header';
-import { AppContext } from '@context/appContext';
+import { useAppContext } from '@/context/AppContext';
 import SignForm from '@components/SignForm';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '@services/firebase';
 import { toast } from 'react-toastify';
 
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+interface NewUser {
+  email: string | null;
+  uid: string;
+  token: string;
+  displayName: string | null;
+}
+
 const LogIn = () => {
-  const { state, setState } = useContext(AppContext);
+  const { state, setState } = useAppContext();
   const navigate = useNavigate();
 
-  const handlerLogIn = async (form) => {
+  const handlerLogIn = async (form: LoginForm): Promise<void> => {
     const { email, password } = form;
-    const notify = (msg: string) => toast(msg);
+    const notify = (msg: string, type: 'success' | 'error'): any =>
+      toast[type](msg);
 
     try {
       const resp = await signInWithEmailAndPassword(auth, email, password);
       const { user } = resp;
-      const newUser = {
+
+      const newUser: NewUser = {
         email: user.email,
         uid: user.uid,
         token: user.accessToken,
-        displayName: user.displayName,
+        displayName: user.email,
       };
 
-      if (state && user) {
+      if (newUser.token) {
         const newState = { ...state, user: newUser };
         setState(newState);
-        notify(`Welcome back ${newUser.email}!`);
-        navigate('/');
+        notify(`Welcome back ${newUser.email}!`, 'success');
+        console.log('🐣', newUser);
       }
     } catch (err) {
       console.log(err);
-      toast.error('Invalid credentials');
+      notify('Invalid credentials', 'error');
     }
   };
+
+  useEffect(() => {
+    console.log('🔥', state);
+    if (state?.user) {
+      console.log('logged', state.user);
+      navigate('/');
+    }
+  }, [state, navigate]);
 
   return (
     <div className="flex flex-col items-center justify-start w-100 h-[100vh] read-bg">

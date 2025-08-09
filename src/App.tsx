@@ -9,7 +9,7 @@ import ErrorPage from '@pages/ErrorPage';
 import LogIn from '@pages/Login';
 import ProtectedRoute from '@components/Auth';
 // context
-import { AppProvider } from '@context/appContext';
+import AppProvider from '@/context/AppContext';
 
 // css
 import 'react-toastify/dist/ReactToastify.css';

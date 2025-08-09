@@ -1,6 +1,6 @@
 export const user = {
   uid: '123',
   email: 'hola@joseavila.dev',
-  token: '123456',
+  token: '12345678',
   displayname: 'John Doe',
-} 
+};

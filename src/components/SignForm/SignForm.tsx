@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, useCallback } from 'react';
-import { AppContext } from '../../context/appContext';
+import { useAppContext } from '../../context/AppContext';
 
 interface SignFormProps {
   action: (form: { email: string; password: string }) => void;
@@ -11,7 +11,7 @@ const SignForm = ({ action }: SignFormProps) => {
     email: '',
     password: '',
   });
-  const { state } = useContext(AppContext);
+  const { state } = useAppContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

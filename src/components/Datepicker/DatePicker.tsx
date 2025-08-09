@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import { AppContext } from '@/context/appContext';
+import { useAppContext } from '@/context/AppContext';
 
 // datePicker
 const DatePicker = () => {
-  const { currentDate, setCurrentDate } = useContext(AppContext);
+  const { currentDate, setCurrentDate } = useAppContext();
 
   // function to move between months and years
   const handleDate = (type: string) => {

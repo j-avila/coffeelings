@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { AppContext } from '@/context/appContext';
+import React, { useEffect } from 'react';
+import { useAppContext } from '@/context/AppContext';
 import { Navigate, useLocation } from 'react-router-dom';
 
 type ProtectedRouteProps = {
@@ -9,9 +9,15 @@ type ProtectedRouteProps = {
 export default function ProtectedRoute({
   component: Component,
 }: ProtectedRouteProps) {
-  const { state } = useContext(AppContext);
+  const { state } = useAppContext();
   const isAuthenticated = state?.user?.token;
   const location = useLocation();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      console.log('User is not authenticated, redirecting to login');
+    }
+  }, [isAuthenticated]);
 
   return (
     <>

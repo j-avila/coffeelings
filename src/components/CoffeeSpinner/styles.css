@@ -64,32 +64,46 @@ body {
   content: '';
   width: 47px;
   height: 47px;
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       ellipse at 75% 59%,
       rgba(255, 255, 255, 0.2),
       transparent 95%
     ),
     radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent 5%),
     radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.3), transparent 55%);
+}
+
+/* .coffee:before {
+  content: '';
+  width: 47px;
+  height: 47px;
   background-image:
     -webkit-radial-gradient(
       ellipse at 75% 59%,
       rgba(255, 255, 255, 0.2),
       transparent 95%
     ),
-    -webkit-radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent
-          5%),
-    -webkit-radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.3), transparent
-          55%);
+    -webkit-radial-gradient(
+        ellipse at 5% 9%,
+        rgba(255, 255, 255, 0.1),
+        transparent 5%
+      ),
+    -webkit-radial-gradient(
+        ellipse at 0% 0%,
+        rgba(255, 255, 255, 0.3),
+        transparent 55%
+      );
   background-image:
-    -moz-radial-gradient(
+    radial-gradient(
       ellipse at 75% 59%,
       rgba(255, 255, 255, 0.2),
       transparent 95%
     ),
-    -moz-radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent
-          5%);
-}
+    radial-gradient(ellipse at 5% 9%, rgba(255, 255, 255, 0.1), transparent 5%),
+    radial-gradient(ellipse at 0% 0%, rgba(255, 255, 255, 0.3), transparent 55%);
+} */
+
 .cup:hover .coffee {
   transform: rotate(15deg);
 }
@@ -97,86 +111,31 @@ body {
 .smoke {
   width: 70px;
   height: 100px;
-  background:;
+  background: transparent; /* Added default background value */
   position: absolute;
   left: 50%;
   margin-left: -40px;
   top: 43px;
-  background-image:
-    -webkit-radial-gradient(
-      75% 59%,
-      ellipse,
-      rgba(255, 255, 255, 0.2),
-      transparent 25%
-    ),
-    -webkit-radial-gradient(25% 70%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          15%),
-    -webkit-radial-gradient(35% 61%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          10%),
-    -webkit-radial-gradient(55% 35%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          15%);
-  background-image:
-    -moz-radial-gradient(
-      75% 59%,
-      ellipse,
-      rgba(255, 255, 255, 0.2),
-      transparent 25%
-    ),
-    -moz-radial-gradient(25% 70%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          15%),
-    -moz-radial-gradient(35% 61%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          10%),
-    -moz-radial-gradient(55% 35%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          15%);
   background-image: radial-gradient(
-      75% 59%,
-      ellipse,
-      rgba(255, 255, 255, 0.2),
-      transparent 25%
-    ),
-    radial-gradient(25% 70%, ellipse, rgba(255, 255, 255, 0.2), transparent 15%),
-    radial-gradient(35% 61%, ellipse, rgba(255, 255, 255, 0.2), transparent 10%),
-    radial-gradient(55% 35%, ellipse, rgba(255, 255, 255, 0.2), transparent 15%);
-  animation: bk 11s infinite;
+    75% 59%,
+    ellipse,
+    rgba(255, 255, 255, 0.2),
+    transparent 95%
+  );
 }
 
 .smoke:after {
   content: '';
   width: 100px;
   height: 100px;
-  background:;
+  background: transparent; /* Added default background value */
   position: absolute;
-  background-image:
-    -webkit-radial-gradient(
-      75% 59%,
-      ellipse,
-      rgba(255, 255, 255, 0.2),
-      transparent 25%
-    ),
-    -webkit-radial-gradient(25% 70%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          15%),
-    -webkit-radial-gradient(35% 61%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          10%);
-  background-image:
-    -moz-radial-gradient(
-      75% 59%,
-      ellipse,
-      rgba(255, 255, 255, 0.2),
-      transparent 25%
-    ),
-    -moz-radial-gradient(25% 70%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          15%),
-    -moz-radial-gradient(35% 61%, ellipse, rgba(255, 255, 255, 0.2), transparent
-          10%);
   background-image: radial-gradient(
-      75% 59%,
-      ellipse,
-      rgba(255, 255, 255, 0.2),
-      transparent 25%
-    ),
-    radial-gradient(25% 70%, ellipse, rgba(255, 255, 255, 0.2), transparent 15%),
-    radial-gradient(35% 61%, ellipse, rgba(255, 255, 255, 0.2), transparent 10%);
-  animation: bk 2s 1s infinite;
+    75% 59%,
+    ellipse,
+    rgba(255, 255, 255, 0.2),
+    transparent 95%
+  );
 }
 
 @keyframes bk {

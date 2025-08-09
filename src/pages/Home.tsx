@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import dayjs from 'dayjs';
 import CoffeStatus from '@components/CoffeeStatus';
 import Indicator from '@components/Indicator';
 import Header from '@components/Header';
 import Footer from '@components/Footer/Footer';
-import { AppContext } from '@context/appContext';
-1;
+import { useAppContext } from '@/context/AppContext';
+
 function App() {
-  const { state, setState } = useContext(AppContext);
+  const { state, setState } = useAppContext();
   const taste = ['amazing', 'ok', 'tired', 'sad', 'stressed'];
 
   const handleChange = (name: string, value: string) => {
